@@ -1,0 +1,4 @@
+defaults:
+  - config_schema
+  - database: chroma_schema
+  - embedding: huggingface_embedding_schema
