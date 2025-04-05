@@ -1,0 +1,3 @@
+defaults:
+  - chat_model: huggingface_chat_model_schema
+  - embedding_model: huggingface_embedding_model_schema

@@ -9,8 +9,8 @@ from langchain_community.vectorstores import Chroma
 
 
 
-CHROMA_PATH = "src/data/chroma"
-DATA_SOURCE_PATH = "src/data/source"
+CHROMA_PATH = "data/chroma"
+DATA_SOURCE_PATH = "data/source"
 
 
 

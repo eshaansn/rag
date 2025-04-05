@@ -1,36 +1,21 @@
-from pydantic.dataclasses import dataclass
-from pydantic import Field
-from typing import Optional, Callable, Union, Tuple, Any
+from typing import Optional
 
 from hydra.core.config_store import ConfigStore
-from omegaconf import MISSING, SI
+from omegaconf import MISSING
+from dataclasses import dataclass, field
+from config_schemas.database import vector_databases_schema, loaders_schema, text_splitters_schema
 
-from langchain_chroma import Chroma
-from chromadb import Client
-from chromadb.config import Settings
-
-@dataclass
-class VectorDatabaseConfig():
-    _target_: str = MISSING
 
 @dataclass
-class ChromaDBConfig(VectorDatabaseConfig):
-    _target_: str = "database.vector_databases.ChromaDB"
-    _partial_: bool = True
-    collection_name: str = 'rag_app'
-    persist_directory: str = 'data/chroma'
-    embedding_function: Any = MISSING
-    collection_metadata: Optional[dict] = None
-    client: Optional[Any] = None
-    client_settings: Optional[Any] = None
-    relevance_score_fn: Optional[Any] = None
-    # create_collection_if_not_exists: Optional[bool] = True
+class DatabaseConfig:
+    vector_database: vector_databases_schema.VectorDatabaseConfig = field(default_factory=lambda: vector_databases_schema.VectorDatabaseConfig())
+    loader: loaders_schema.LoaderConfig = field(default_factory=lambda: loaders_schema.LoaderConfig())
+    text_splitter: text_splitters_schema.TextSplitterConfig = field(default_factory=lambda: text_splitters_schema.TextSplitterConfig())
 
 def setup_config() -> None:
+    vector_databases_schema.setup_config()
+    loaders_schema.setup_config()
+    text_splitters_schema.setup_config()
 
     cs = ConfigStore.instance()
-    cs.store(
-        name="chroma_schema",
-        group="database",
-        node=ChromaDBConfig,
-    )
+    cs.store(name="database_schema", node=DatabaseConfig, group="database")

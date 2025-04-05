@@ -2,6 +2,8 @@ from dataclasses import dataclass
 from typing import List
 from langchain.prompts import ChatPromptTemplate
 from langchain_aws import ChatBedrock
+from langchain_huggingface import ChatHuggingFace
+from langchain_huggingface import HuggingFaceEndpoint
 import hydra
 from hydra.utils import instantiate
 from omegaconf import DictConfig, OmegaConf
@@ -20,8 +22,6 @@ Answer the question based only on the following context:
 Answer the question based on the above context: {question}
 """
 
-# BEDROCK_MODEL_ID = "anthropic.claude-3-haiku-20240307-v1:0"
-
 
 @dataclass
 class QueryResponse:
@@ -29,33 +29,38 @@ class QueryResponse:
     response_text: str
     sources: List[str]
 
-@hydra.main(config_path="configs", config_name="config", version_base=None) 
-def main(config: DictConfig):
-    db = instantiate(config.database)
-    embeddings = instantiate(config.embedding).get_embedding_function()
-    db = db(embedding_function=embeddings).create_database()
 
-    query_rag(query_text="How much does a landing page cost to develop?", db=db)
-
-def query_rag(query_text: str, db) -> QueryResponse:
+def query_rag(config: DictConfig, query_text: str, db) -> QueryResponse:
 
     # Search the DB.
     results = db.similarity_search_with_score(query_text, k=3)
+
     context_text = "\n\n---\n\n".join([doc.page_content for doc, _score in results])
     prompt_template = ChatPromptTemplate.from_template(PROMPT_TEMPLATE)
     prompt = prompt_template.format(context=context_text, question=query_text)
-    print(prompt)
 
-    # model = ChatBedrock(model_id=BEDROCK_MODEL_ID)
-    # response = model.invoke(prompt)
-    # response_text = response.content
+    print(f"Prompt: {prompt}")
 
-    # sources = [doc.metadata.get("id", None) for doc, _score in results]
-    # print(f"Response: {response_text}\nSources: {sources}")
+    model = instantiate(config.models.chat_model).get_model()
+ 
+    response = model.invoke(prompt)
+    response_text = response.content
 
-    # return QueryResponse(
-    #     query_text=query_text, response_text=response_text, sources=sources
-    # )
+    sources = [doc.metadata.get("id", None) for doc, _score in results]
+
+    return QueryResponse(
+        query_text=query_text, response_text=response_text, sources=sources
+    )
+
+@hydra.main(config_path="configs", config_name="config", version_base=None) 
+def main(config: DictConfig):
+    db = instantiate(config.database.vector_database)
+    embeddings = instantiate(config.models.embedding_model).get_embedding_function()
+    db = db(embedding_function=embeddings).create_database()
+
+    respone = query_rag(config, query_text="In monopoly deal, can you use house cards as cash?", db=db)
+
+    print(f"Response: {respone.response_text}\nSources: {respone.sources}")
 
 
 if __name__ == "__main__":
