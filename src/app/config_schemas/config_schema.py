@@ -3,12 +3,12 @@ from typing import Optional
 from hydra.core.config_store import ConfigStore
 from omegaconf import MISSING
 from dataclasses import dataclass, field
-from . import database_schema, model_schema
+from app.config_schemas import database_schema, model_schema
 
 @dataclass
 class Config:
-    database: database_schema.DatabaseConfig = field(default_factory=lambda: database_schema.DatabaseConfig)
-    models: model_schema.ModelConfig = field(default_factory=lambda: model_schema.ModelConfig)
+    database: database_schema.DatabaseConfig = MISSING
+    models: model_schema.ModelConfig = MISSING
 
 def setup_config() -> None:
     model_schema.setup_config()

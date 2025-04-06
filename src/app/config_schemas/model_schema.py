@@ -3,13 +3,13 @@ from typing import Optional
 from hydra.core.config_store import ConfigStore
 from omegaconf import MISSING
 from dataclasses import dataclass, field
-from config_schemas.models import chat_models_schema, embedding_models_schema
+from app.config_schemas.models import chat_models_schema, embedding_models_schema
 
 
 @dataclass
 class ModelConfig:
-    chat_model: chat_models_schema.ChatModelConfig = field(default_factory=lambda: chat_models_schema.ChatModelConfig)
-    embedding_model: embedding_models_schema.EmbeddingConfig = field(default_factory=lambda: embedding_models_schema.EmbeddingConfig)
+    chat_model: chat_models_schema.ChatModelConfig = MISSING
+    embedding_model: embedding_models_schema.EmbeddingConfig = MISSING
 
 def setup_config() -> None:
     chat_models_schema.setup_config()

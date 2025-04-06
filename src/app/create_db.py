@@ -10,6 +10,8 @@ config_schema.setup_config()
 def main(config):
 
     documents = instantiate(config.database.loader).load()
+    # print(instantiate(config.database.loader).cwd())
+    # print(f"Documents: {documents[:5]}")
     text_splitter = instantiate(config.database.text_splitter)
     chunks = text_splitter.split_documents(documents)
     embeddings = instantiate(config.models.embedding_model).get_embedding_function()

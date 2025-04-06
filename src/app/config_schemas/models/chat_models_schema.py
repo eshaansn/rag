@@ -16,7 +16,7 @@ class ChatModelConfig():
 
 @dataclass
 class BedrockChatModelConfig(ChatModelConfig):
-    _target_: str = "models.chat_models.BedrockChatModel"
+    _target_: str = "app.models.chat_models.BedrockChatModel"
     model_id: Optional[str] = None
     aws_access_key_id: Optional[str] = None
     aws_secret_access_key: Optional[str] = None
@@ -46,7 +46,7 @@ class BedrockChatModelConfig(ChatModelConfig):
 
 @dataclass
 class HuggingFaceChatModelConfig(ChatModelConfig):
-    _target_: str = "models.chat_models.HuggingFaceChatModel"
+    _target_: str = "app.models.chat_models.HuggingFaceChatModel"
     cache: Optional[bool] = False
     callback_manager: Optional[Any] = None
     callbacks: Optional[Any] = None
@@ -60,14 +60,14 @@ class HuggingFaceChatModelConfig(ChatModelConfig):
     tokenizer: Optional[Any] = None
     verbose: Optional[bool] = False
 
-    repo_id: str='microsoft/Phi-3.5-mini-instruct'
-    task: str="text-generation"
+    repo_id: str = MISSING
+    task: str= MISSING
 
 
 
 @dataclass
 class OpenAIChatModelConfig(ChatModelConfig):
-    _target_: str = "models.chat_models.OpenAIChatModel"
+    _target_: str = "app.models.chat_models.OpenAIChatModel"
     cache: Optional[bool] = False
     callback_manager: Optional[Any] = None
     callbacks: Optional[Any] = None

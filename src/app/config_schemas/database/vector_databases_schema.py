@@ -6,8 +6,7 @@ from hydra.core.config_store import ConfigStore
 from omegaconf import MISSING, SI
 
 from langchain_chroma import Chroma
-from chromadb import Client
-from chromadb.config import Settings
+
 
 @dataclass
 class VectorDatabaseConfig():
@@ -15,10 +14,10 @@ class VectorDatabaseConfig():
 
 @dataclass
 class ChromaDBConfig(VectorDatabaseConfig):
-    _target_: str = "database.vector_databases.ChromaDB"
+    _target_: str = "app.database.vector_databases.ChromaDB"
     _partial_: bool = True
     collection_name: str = 'rag_app'
-    persist_directory: str = 'data/chroma'
+    persist_directory: str = 'app/data/chroma'
     collection_metadata: Optional[dict] = None
     client: Optional[Any] = None
     client_settings: Optional[Any] = None

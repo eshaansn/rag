@@ -7,7 +7,7 @@ from langchain_huggingface import HuggingFaceEndpoint
 import hydra
 from hydra.utils import instantiate
 from omegaconf import DictConfig, OmegaConf
-from config_schemas import config_schema
+from app.config_schemas import config_schema
 
 config_schema.setup_config()
 # from rag_app.get_chroma_db import get_chroma_db
@@ -39,7 +39,7 @@ def query_rag(config: DictConfig, query_text: str, db) -> QueryResponse:
     prompt_template = ChatPromptTemplate.from_template(PROMPT_TEMPLATE)
     prompt = prompt_template.format(context=context_text, question=query_text)
 
-    print(f"Prompt: {prompt}")
+    # print(f"Prompt: {prompt}")
 
     model = instantiate(config.models.chat_model).get_model()
  
@@ -54,13 +54,15 @@ def query_rag(config: DictConfig, query_text: str, db) -> QueryResponse:
 
 @hydra.main(config_path="configs", config_name="config", version_base=None) 
 def main(config: DictConfig):
+    print(OmegaConf.to_yaml(config))
+
     db = instantiate(config.database.vector_database)
     embeddings = instantiate(config.models.embedding_model).get_embedding_function()
     db = db(embedding_function=embeddings).create_database()
 
     respone = query_rag(config, query_text="In monopoly deal, can you use house cards as cash?", db=db)
 
-    print(f"Response: {respone.response_text}\nSources: {respone.sources}")
+    return f"Response: {respone.response_text}\nSources: {respone.sources}"
 
 
 if __name__ == "__main__":

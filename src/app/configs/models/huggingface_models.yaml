@@ -1,0 +1,10 @@
+defaults:
+  - chat_model: huggingface_chat_model_schema
+  - embedding_model: huggingface_embedding_model_schema
+
+chat_model:
+  repo_id: 'microsoft/Phi-3.5-mini-instruct'
+  task: 'text-generation'
+
+embedding_model:
+  model_name: 'sentence-transformers/all-MiniLM-L6-v2'
