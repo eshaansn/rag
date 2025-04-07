@@ -1,5 +1,7 @@
 services:
   app:
+    env_file:
+      - .env
     user: "${USER_ID:-1000}"
     hostname: "${HOST_NAME:-eshaansn}"
     image: rag-app

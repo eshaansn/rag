@@ -17,7 +17,7 @@ class ChromaDBConfig(VectorDatabaseConfig):
     _target_: str = "rag_app.database.vector_databases.ChromaDB"
     _partial_: bool = True
     collection_name: str = 'rag'
-    persist_directory: str = 'rag_app/data/chroma'
+    persist_directory: str = 'image/rag_app/data/chroma'
     collection_metadata: Optional[dict] = None
     client: Optional[Any] = None
     client_settings: Optional[Any] = None
