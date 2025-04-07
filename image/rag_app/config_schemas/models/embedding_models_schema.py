@@ -16,7 +16,7 @@ class EmbeddingConfig():
 
 @dataclass
 class BedrockEmbeddingConfig(EmbeddingConfig):
-    _target_: str = "app.models.embedding_models.BedrockEmbedding"
+    _target_: str = "rag_app.models.embedding_models.BedrockEmbedding"
     model_id: str = 'amazon.titan-embed-text-v1'
     aws_access_key_id: Optional[str] = None
     aws_secret_access_key: Optional[str] = None
@@ -29,7 +29,7 @@ class BedrockEmbeddingConfig(EmbeddingConfig):
 
 @dataclass
 class HuggingFaceEmbeddingConfig(EmbeddingConfig):
-    _target_: str = "app.models.embedding_models.HuggingFaceEmbedding"
+    _target_: str = "rag_app.models.embedding_models.HuggingFaceEmbedding"
     model_name: str = MISSING
     cache_folder: Optional[str] = None
     encode_kwargs: Optional[Dict[str, Any]] = field(default_factory=lambda: {})
@@ -39,7 +39,7 @@ class HuggingFaceEmbeddingConfig(EmbeddingConfig):
 
 @dataclass
 class OpenAIEmbeddingConfig(EmbeddingConfig):
-    _target_: str = "app.models.embedding_models.OpenAIEmbedding"
+    _target_: str = "rag_app.models.embedding_models.OpenAIEmbedding"
     model: str = "text-embedding-ada-002"
     dimension: Optional[int] = None
     api_key: Optional[str] = None

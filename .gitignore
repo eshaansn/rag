@@ -151,5 +151,5 @@ dmypy.json
 .pyre/
 
 # User created
-rag-aws
+rag_aws/
 outputs/

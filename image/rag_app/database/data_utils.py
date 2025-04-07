@@ -5,12 +5,7 @@ import sys
 from langchain.schema.document import Document
 from langchain_community.vectorstores import Chroma
 
-from langchain_community.vectorstores import Chroma
-
-
-
-CHROMA_PATH = "data/chroma"
-DATA_SOURCE_PATH = "data/source"
+CHROMA_PATH = "rag_app/data/chroma"
 
 
 

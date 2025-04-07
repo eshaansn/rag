@@ -8,3 +8,4 @@ chat_model:
 
 embedding_model:
   model_name: 'sentence-transformers/all-MiniLM-L6-v2'
+    

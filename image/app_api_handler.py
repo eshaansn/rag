@@ -2,8 +2,8 @@ import uvicorn
 from fastapi import FastAPI
 from mangum import Mangum
 from pydantic import BaseModel
-from app.query_rag import QueryResponse, query_rag
-from app.config_schemas import config_schema
+from rag_app.query_rag import QueryResponse, query_rag
+from rag_app.config_schemas import config_schema
 from hydra import compose, initialize
 from hydra.utils import instantiate
 
@@ -17,7 +17,7 @@ class SubmitQueryRequest(BaseModel):
 
 
 # Load config once at startup
-with initialize(version_base=None, config_path="app/configs"):
+with initialize(version_base=None, config_path="rag_app/configs"):
     config = compose(config_name="config")
 
 
@@ -47,4 +47,4 @@ if __name__ == "__main__":
     # Run this as a server directly.
     port = 8000
     print(f"Running the FastAPI server on port {port}.")
-    uvicorn.run("app_api_handler:app", host="localhost", port=port)
+    uvicorn.run("app_api_handler:app", host="0.0.0.0", port=port)

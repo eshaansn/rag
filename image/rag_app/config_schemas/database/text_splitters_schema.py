@@ -14,7 +14,7 @@ class TextSplitterConfig():
 
 @dataclass
 class RecursiveCharacterTextSplitterConfig(TextSplitterConfig):
-    _target_: str = "app.database.text_splitters.RecursiveCharacterTextSplitterClass"
+    _target_: str = "rag_app.database.text_splitters.RecursiveCharacterTextSplitterClass"
     separators: Optional[List[str]] = None
     keep_separator: Optional[bool] = False
     chunk_size: int = 600

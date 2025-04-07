@@ -3,7 +3,7 @@ from typing import Optional
 from hydra.core.config_store import ConfigStore
 from omegaconf import MISSING
 from dataclasses import dataclass, field
-from app.config_schemas.models import chat_models_schema, embedding_models_schema
+from rag_app.config_schemas.models import chat_models_schema, embedding_models_schema
 
 
 @dataclass

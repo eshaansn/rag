@@ -13,8 +13,8 @@ class LoaderConfig():
 
 @dataclass
 class PDFLoaderConfig(LoaderConfig):
-    _target_: str = "app.database.loaders.PDFLoader"
-    path: str = "app/data/source/"
+    _target_: str = "rag_app.database.loaders.PDFLoader"
+    path: str = "rag_app/data/source/"
     glob: Optional[str] = "**/[!.]*.pdf"
     silent_errors: Optional[bool] = False
     recursive: Optional[bool] = False

@@ -3,7 +3,7 @@ from typing import Optional
 from hydra.core.config_store import ConfigStore
 from omegaconf import MISSING
 from dataclasses import dataclass, field
-from app.config_schemas.database import vector_databases_schema, loaders_schema, text_splitters_schema
+from rag_app.config_schemas.database import vector_databases_schema, loaders_schema, text_splitters_schema
 
 
 @dataclass

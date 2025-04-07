@@ -14,10 +14,10 @@ class VectorDatabaseConfig():
 
 @dataclass
 class ChromaDBConfig(VectorDatabaseConfig):
-    _target_: str = "app.database.vector_databases.ChromaDB"
+    _target_: str = "rag_app.database.vector_databases.ChromaDB"
     _partial_: bool = True
-    collection_name: str = 'rag_app'
-    persist_directory: str = 'app/data/chroma'
+    collection_name: str = 'rag'
+    persist_directory: str = 'rag_app/data/chroma'
     collection_metadata: Optional[dict] = None
     client: Optional[Any] = None
     client_settings: Optional[Any] = None
