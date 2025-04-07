@@ -27,7 +27,7 @@ guard-%:
 
 ## Generate final config local. For overrides use: OVERRIDES=<overrides>
 api_server: up
-	@$(DOCKER_COMPOSE_EXEC) python image/app_api_handler.py
+	@$(DOCKER_COMPOSE_EXEC) -it python image/app_api_handler.py
 
 ## Starts jupyter lab
 notebook: up
@@ -60,7 +60,7 @@ down:
 ## Open an interactive shell in docker container
 exec-in: up
 	docker exec -it $(CONTAINER_NAME) bash
-
+# docker exec --env-file .env -it $(CONTAINER_NAME) bash
 .DEFAULT_GOAL := help
 
 # Inspired by <http://marmelab.com/blog/2016/02/29/auto-documented-makefile.html>

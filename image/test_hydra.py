@@ -11,7 +11,7 @@ def main(config):
     # print(OmegaConf.to_yaml(config))  # Prints the entire config in YAML format
 
     # documents = instantiate(config.database.loader).load()
-    # print(instantiate(config.database.loader).cwd())
+    print(instantiate(config.database.loader).cwd())
     # print(f"Documents: {documents[:5]}")
     # text_splitter = instantiate(config.database.text_splitter)
     # chunks = text_splitter.split_documents(documents)
