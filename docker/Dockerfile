@@ -35,11 +35,11 @@ WORKDIR /app
 RUN poetry config virtualenvs.create false 
 RUN python3.11 -m venv ${VIRTUAL_ENV}
 RUN pip install --upgrade pip setuptools 
-RUN poetry install && cp poetry.lock ${BUILD_POETRY_LOCK}
+RUN poetry install 
+RUN cp poetry.lock ${BUILD_POETRY_LOCK}
 RUN rm -rf ${HOME}/.cache/*
 
 RUN pip install pysqlite3-binary
-
 
 USER root
 COPY ./docker/scripts/* /
