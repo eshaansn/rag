@@ -1,5 +1,6 @@
 *.pyc
 **/chroma
+**/source
 env/
 
 # Some files generated for tutorial.
@@ -8,8 +9,8 @@ filtered_reqs.txt
 pip_freeze.txt
 generate_reqs.py
 
-./src/data
-./src/data/chroma
+./image/rag_app/data
+
 
 __pycache__
 
