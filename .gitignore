@@ -12,7 +12,7 @@ generate_reqs.py
 ./image/rag_app/data
 
 # Terraform files
-main.tf
+*.tf
 # Terraform binary files
 *.tfstate
 *.tfstate.backup
