@@ -183,3 +183,4 @@ dmypy.json
 # User created
 rag_aws/
 outputs/
+rag_infra
