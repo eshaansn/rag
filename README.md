@@ -3,10 +3,9 @@
 This project is focused on implementing a Retrieval-Augmented Generation (RAG) system.
 
 ## Features Implemented
-- **Data Retrieval**: Integrated a retrieval mechanism to fetch relevant data from the knowledge base.
-- **Model Integration**: Connected a generative model to enhance responses with retrieved data.
-- **API Development**: Built APIs to interact with the RAG system.
-- **Testing**: Conducted unit and integration tests to ensure system reliability.
+- **Data Retrieval**: Integrated a retrieval mechanism to fetch relevant data from the knowledge base (ChromaDB).
+- **Model Integration**: Connected a generative model to enhance responses with retrieved data (Through the Huggingface API, Microsoft Phi 3.5 mini-instruct).
+- **API Development**: Built APIs using FastAPI to interact with the RAG system.
 - **Configuration Management**: Employed Hydra for managing configuration files and runtime parameters, ensuring flexibility and scalability.
 
 <!-- ## Getting Started
